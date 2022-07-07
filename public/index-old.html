@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kal Pathippagam</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <script src="https://kit.fontawesome.com/86a47226cf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div id="hdr">
+        <img id="main_logo" src="images/logo.png">&nbsp;
+        <span id="main_ttl">KAL PATHIPPAGAM</span>
+        <span id="main_desc">-- Polytechnic Books Publishers</span>
+    </div>
+
+
+
+    <ul class="nav nav-pills ">
+        <li class="active"><a data-toggle="pill" href="#books">ORDER BOOKS</a></li>
+        <li><a data-toggle="pill" href="#quest">DOWNLOADS</a></li>
+        <li><a data-toggle="pill" href="#about">CONTACT US</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="books" class="tab-pane fade in active">
+
+            <div id="order_cont">
+                <button id="ord_close" onclick="ord_quit()">&times;</button><br>
+                <div id="ord_tag">YOUR ORDER</div>
+                <table id="ord_tbl">
+
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 90%;">Title</th>
+                        <th style="width: 15%;">Qty</th>
+                    </tr>
+
+                    <tbody id="ord_cont">
+
+                    </tbody>
+                </table>
+                <span>Estimated Total: </span><span id="ord_amt">₹100.00</span>
+                <hr>
+                <div id="details" style="text-align: left;">
+                    <table style="margin: auto;">
+                        <tr>
+                            <td>Name:</td>
+                            <td><input id="o_name" autocomplete="name" type="text" onchange="o_tel.focus()"><span
+                                    id="name_req">
+                                    (*Required)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td><input id="o_tel" autocomplete="tel" type="tel" onchange="o_email.focus()"><span
+                                    id="tel_req">
+                                    (*Required)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><input id="o_email" autocomplete="email" type="email" onchange="cnf_btn.focus()"><span
+                                    id="o_email_tag"></span></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <button id="cnf_btn" onclick="ord_conf();">CONFIRM</button><br>
+                <div id="stat"></div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 books_tab_int">
+                        <span class="green">KAL PATHIPPAGAM</span> presents you the list of all the published books...
+                    </div>
+                </div>
+                <input id="search_txt" type="text" placeholder="Search.." oninput="book_filter();">
+                <div id="book_lst">
+
+
+                </div>
+            </div>
+            <span id="chk_out_span" onclick="chk_out()">
+                <span id="chk_out_tag" class="label label-success"></span>
+                <div id="chk_out_cont">
+                    <img id="chk_out_img" class="img-circle" src="images/books.png"><br>
+                    <span id="chk_out_count" class="label label-primary"></span>
+                </div>
+            </span>
+
+        </div>
+
+        <div id="quest" class="tab-pane fade">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 books_tab_int">
+                        <span class="green">KAL PATHIPPAGAM</span> is generous in presenting the collection of <span
+                            class="green">2 & 3 Marks Questions</span> for
+                        the benefit of the Student Community...
+                    </div>
+                </div>
+
+                <input id="search_txt_quest" type="text" placeholder="Search.." oninput="quest_filter();">
+                <div id="quest_lst">
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div id="about" class="tab-pane fade">
+            <div class="container">
+                <br>
+                <table id="cont_tbl">
+                    <tr>
+                        <td colspan="2">Propreitor:&nbsp; <span id="prop_name">N. IYANARAAPAN</span>, M.E., M.I.S.T.E.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="glyphicon glyphicon-earphone"></span></td>
+                        <td>9944650380 <button style="margin-bottom: 10px;" class="call_btn"
+                                onclick="location.href='tel:9944650380'">CALL</button><button class="whats_btn"
+                                onclick="location.href='https://api.whatsapp.com/send?phone=919944650380'"><i
+                                    style="color:white" class="fa fa-whatsapp"></i></button><br>
+                            9626626747 <button class="call_btn"
+                                onclick="location.href='tel:9626626747'">CALL</button><button class="whats_btn"
+                                onclick="location.href='https://api.whatsapp.com/send?phone=919626626747'"><i
+                                    style="color:white" class="fa fa-whatsapp"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td><span class="glyphicon glyphicon-envelope"></span></td>
+                        <td>kalpathippagam@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td><span class="fa fa-facebook"></span></td>
+                        <td><a
+                                href="https://www.facebook.com/people/Kal-Pathippagam/100011290696369">Kal-Pathippagam</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fa fa-twitter"></span></td>
+                        <td><a href="https://twitter.com/kal_pathippagam?lang=en">@kal_pathippagam</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="glyphicon glyphicon-pushpin"></span></td>
+                        <td>No.2, Arni Rd, Adukkamparai,<br>Vellore - 632057,<br>TamilNadu, India.</td>
+                    </tr>
+                </table><br>
+                <iframe id="map"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB3IWwav3EZ0WeYAsS1vLAoKUZ0Kivjggg&q=kal pathipppagam,vellore"
+                    allowfullscreen>
+                </iframe><br>
+                <HR>
+                <div id="msg_tag">LEAVE US A MESSAGE</div>
+                <table id="msg_tbl">
+                    <tr>
+                        <td>Name:</td>
+                        <td><input id=msg_name type="name" autocomplete="name"></td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td><input id=msg_phone type="tel" autocomplete="tel"></td>
+                    </tr>
+                    <tr>
+                        <td>E-mail:</td>
+                        <td><input id=msg_mail type="email" autocomplete="email"></td>
+                    </tr>
+                </table><br>
+                Your Message:<br>
+                <textarea id="msg_area"></textarea><br>
+                <button id="msg_send" onclick="send_msg();">SEND</button><span id="msg_resp"></span>
+                <br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var book_ttl = ["Manufacturing Processes (Tamil)", "Manufacturing Processes (English)", "Strength of Materials (Tamil)", "Strength of Materials (English)", "Machine Drawing (Tamil)", "Machine Drawing (English)", "CA & CAD Practical Manual", "Foundry & Welding Practical Manual", "Lathe & Drilling Practical Manual", "Metrology & Metallography Manual", "Process Automation Practical Manual", "Thermal & Automobile Practical Manual", "Life & Employability Skills Practical Manual", "Engineering Graphics I & II (Tamil)", "Engineering Graphics I & II (English)", "Workshop Practice Practical Manual", "Special Machines (Tamil)", "Special Machines (English)", "Special Machines Manual", "Heat Power Engineering (Tamil)", "Heat Power Engineering (English)", "CAD & Manufacturing (Tamil)", "CAD & Manufacturing (English)", "CAD & Manufacturing Practical Manual"];
+    var book_pr = [168, 168, 168, 168, 126, 126, 148, 98, 98, 108, 98, 108, 128, 178, 178, 108, 168, 168, 96, 198, 198, 168, 168, 108];
+    var book_srl = [];
+    var book_ord = [];
+    var ord_cnt = 0;
+    var hide_int;
+
+    var quest_ttl = ["Manufacturing Processes (Tamil)", "Manufacturing Processes (English)", "Strength of Materials (Tamil)", "Strength of Materials (English)", "Special Machines (Tamil)", "Special Machines (English)", "Heat Power Engineering (Tamil)", "Heat Power Engineering (English)", "CAD & Manufacturing (Tamil)", "CAD & Manufacturing (English)"];
+
+
+    book_ttl.forEach(function (x, y) {
+        book_srl.push(y);
+        book_ord.push(0);
+    })
+    fill_book(book_ttl, book_pr);
+
+    fill_quest(quest_ttl);
+
+    function fill_book(ttl, pr) {
+        var str = "";
+        ttl.forEach(function (x, i) {
+            str += `${(i % 2 == 0) ? '<div class="row">' : ''}
+                    <div class="col-sm-6">
+                        <div id="book_cont_${i}" ${book_ord[book_srl[i]] ? "style='background-color:darkblue'" : ""} class="book_cont">
+                            <img src="images/wrappers/${x}.png" class="book_img">
+                            <div class="book_tbl">
+                                <div class="book_cont_ttl">${x}</div>
+                                <div><span class="book_cont_tag">Price:</span> <span class="book_cont_price_amt">₹ ${pr[i]}.00</span></div>
+                                <div class="book_cont_tag">Qty : <input id="q${i}" value=${book_ord[book_srl[i]] || "\"\""} type="number" min="0" class="inp_num" onchange="add_book(${i},q${i}.value)" /><button class="btn_add" onclick="add_book(${i},q${i}.value)">ADD</button>
+                                    <button id="btn_rem_${i}" class="btn_remove" style='display:${book_ord[book_srl[i]] ? "inline" : "none"}'' onclick="rem_book(${i})">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    ${(i % 2 == 1) ? '</div>' : ''}`
+        })
+        str += `<br><br><br><br><br><br>`;
+        book_lst.innerHTML = str;
+    }
+
+    function book_filter() {
+        var ttl_flt = [];
+        var pr_flt = [];
+        book_srl = [];
+        book_ttl.forEach(function (x, i) {
+            if (x.toLowerCase().indexOf(search_txt.value.toLowerCase()) >= 0) {
+                book_srl.push(i);
+                ttl_flt.push(x);
+                pr_flt.push(book_pr[i]);
+            }
+        });
+        fill_book(ttl_flt, pr_flt);
+    }
+
+    function add_book(srl_no, qnt) {
+        if (qnt > 0) {
+            clearTimeout(hide_int);
+            if (!ord_cnt) {
+                $("#chk_out_span").animate({
+                    "right": "10px"
+                }, 500)
+            }
+            $("#book_cont_" + srl_no).css("backgroundColor", "darkblue");
+            $("#btn_rem_" + srl_no).css("display", "inline");
+            chk_out_tag.innerHTML = book_ttl[book_srl[srl_no]] + "<br>added"
+            chk_out_tag.style.display = "none";
+            $("#chk_out_tag").show(1000, function () {
+                hide_int = setTimeout(() => {
+                    $("#chk_out_tag").hide(1000);
+                }, 3000);
+            })
+
+            if (!book_ord[book_srl[srl_no]]) {
+                ord_cnt++;
+                chk_out_count.innerHTML = ord_cnt + " titles"
+            }
+            book_ord[book_srl[srl_no]] = parseInt(qnt);
+        } else {
+            if (book_ord[book_srl[srl_no]]) {
+                rem_book(srl_no);
+            }
+        }
+
+    }
+
+    function rem_book(srl_no) {
+        book_ord[book_srl[srl_no]] = 0;
+        $("#btn_rem_" + srl_no).hide(500);
+        document.getElementById("q" + srl_no).value = "";
+        ord_cnt--;
+        $("#book_cont_" + srl_no).css("backgroundColor", "");
+        chk_out_count.innerHTML = ord_cnt + " titles"
+        if (ord_cnt == 0) {
+            $("#chk_out_span").animate({
+                "right": "-100px"
+            }, 500)
+        }
+    }
+
+    function chk_out() {
+        ord_cont.innerHTML = "";
+        var x_cnt = 0;
+        var tot_amt = 0;
+        book_ord.forEach(function (x, i) {
+            if (x) {
+                x_cnt++;
+                ord_cont.innerHTML += `<tr><td>${x_cnt}</td><td style="text-align:left">${book_ttl[i]}</td><td>${x}</td>`;
+                tot_amt += book_pr[i] * x;
+            }
+        });
+        ord_amt.innerHTML = "₹ " + tot_amt;
+        $("#book_lst").hide(500);
+        $("#order_cont").animate({
+            "top": "80px"
+        }, 1000);
+        cnf_btn.disabled = false;
+        $("#cnf_btn").css("opacity", "1");
+    }
+    function ord_conf() {
+
+        if (o_name.value == "") {
+            o_name.focus();
+            name_req.style.color = "darkred";
+            return;
+        }
+        if (o_tel.value == "" || o_tel.value.length != 10) {
+            o_tel.focus();
+            tel_req.style.color = "darkred";
+            return;
+        }
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (o_email.value && !re.test(o_email.value)) {
+            o_email_tag.innerHTML = "*INVALID";
+            o_email.focus();
+            return;
+        } else {
+            o_email_tag.innerHTML = "";
+        }
+
+        var book_ord_ttl = [];
+        var book_ord_qty = [];
+        book_ord.forEach(function (x, i) {
+            if (x) {
+                book_ord_ttl.push(i);
+                book_ord_qty.push(x);
+            }
+        })
+
+        stat.innerHTML = "<span class='loader'></span>"
+        $.ajax({
+            url: "https://kal-pathippagam.web.app/sendMail",
+            type: "POST",
+            data: { name: o_name.value, tel: o_tel.value, mail: o_email.value, book_ord_t: book_ord_ttl, book_ord_q: book_ord_qty, date: Date.now() }
+        }).done(function (data) {
+            stat.innerHTML = "ORDER TAKEN<br>We will contact you shortly..."
+            $("#stat").css("color", "yellow");
+            cnf_btn.disabled = true;
+            $("#cnf_btn").css("opacity", "0.5");
+
+
+        }).fail(function () {
+            stat.innerHTML = "Some ERROR occurred<br>Try again later..."
+            $("#stat").css("color", "darkred");
+        })
+
+
+
+    }
+    function ord_quit() {
+        $("#book_lst").show(500);
+        $("#order_cont").animate({
+            "top": "-600px"
+        }, 500)
+    }
+
+
+    function fill_quest(ttl) {
+        var str = "";
+        ttl.forEach(function (x, i) {
+            str += `${(i % 2 == 0) ? '<div class="row">' : ''}
+                    <div class="col-sm-6">
+                        <div class="book_cont">
+                            <img src="images/quest/${x}.png" class="quest_img">
+                            <div class="book_tbl">
+                                <div class="quest_tag">2 & 3 marks</div>
+                                <div class="book_cont_ttl">${x}</div>
+                                <button class="btn_view" onclick="view('${x}')">VIEW</button>
+                            </div>
+                        </div>
+                    </div>
+                    ${(i % 2 == 1) ? '</div>' : ''}`
+        })
+        str += `<br><br><br><br><br><br>`;
+
+        quest_lst.innerHTML = str;
+    }
+
+    function quest_filter() {
+        var ttl_flt = [];
+        quest_ttl.forEach(function (x, i) {
+            if (x.toLowerCase().indexOf(search_txt_quest.value.toLowerCase()) >= 0) {
+                ttl_flt.push(x);
+            }
+        });
+        fill_quest(ttl_flt);
+    }
+
+    function view(q) {
+        var w = window.open('quest/' + q + '.pdf');
+    }
+
+    function send_msg() {
+        if (msg_area.value) {
+            msg_resp.innerHTML = "Thank you for your response";
+            $.ajax({
+                url: "https://kal-pathippagam.web.app/sendMsg",
+                type: "POST",
+                data: { name: msg_name.value, tel: msg_phone.value, mail: msg_mail.value, msg: msg_area.value, date: Date.now() }
+            })
+        }
+
+    }
+
+//AIzaSyB3IWwav3EZ0WeYAsS1vLAoKUZ0Kivjggg
+</script>
+
+</html>

@@ -1,0 +1,323 @@
+<html>
+
+<head>
+	<title>KAL Master Web</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<script src="D:/D/Agilan/JavaScript/res/jquery.min.js"></script>
+	<script src="D:/D/Agilan/JavaScript/res/bootstrap.min.js"></script>
+	<script src="D:/D/Agilan/JavaScript/res/firebase-app.js"></script>
+	<script src="D:/D/Agilan/JavaScript/res/firebase-database.js"></script>
+</head>
+<style>
+	body {
+		background-color: black;
+		color: white;
+	}
+
+	#hdr {
+		background-color: yellowgreen;
+		padding: 5px;
+	}
+
+	#main_logo {
+		height: 65px;
+	}
+
+	#main_ttl {
+		font-size: 25px;
+		white-space: nowrap;
+		position: absolute;
+		top: 15px;
+		color: deeppink;
+		font-weight: bolder;
+	}
+
+	#main_desc {
+		font-size: 15px;
+		position: absolute;
+		top: 45px;
+		font-weight: bold;
+		font-style: oblique;
+		color: blue;
+	}
+
+	.nav {
+		background-color: white;
+		font-size: 12px;
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		font-weight: bold;
+		border-radius: 0 0 10px 10px;
+		border: 5px solid yellowgreen;
+	}
+
+	#ord_tbl,
+	#msg_tbl {
+		height: 600px;
+		overflow: auto;
+		display: block;
+		border-collapse: separate;
+		background-color: darkblue;
+	}
+
+	.ord_th,
+	.msg_th {
+		text-align: center;
+		position: sticky;
+		top: 0;
+		background-color: green;
+	}
+
+	#ord_tbl td,
+	#msg_tbl td {
+		border: 1px solid red;
+		padding: 10px;
+	}
+
+	#ord_bdy td,
+	#msg_bdy td {
+		cursor: pointer;
+		white-space: nowrap;
+	}
+
+	#ord_main>tbody,
+	#msg_main>tbody {
+		vertical-align: top;
+	}
+
+	#ord_name,
+	#msg_name {
+		font-size: 30px;
+	}
+
+	#ord_rec_tbl {
+		border-collapse: collapse;
+		margin: auto;
+	}
+
+	#ord_rec_tbl th {
+		text-align: center;
+	}
+
+	#ord_rec_tbl td,
+	th {
+		border: 2px solid magenta;
+		padding: 10px;
+	}
+
+	#msg_rec {
+		padding-left: 40px;
+	}
+</style>
+
+<body>
+	<div id="hdr">
+		<img id="main_logo" src="public/images/logo.png">&nbsp;
+		<span id="main_ttl">KAL PATHIPPAGAM</span>
+		<span id="main_desc">-- Engineering Books Publishers</span>
+	</div>
+
+	<ul class="nav nav-pills nav-justified ">
+		<li class="active"><a id="ord_li" data-toggle="pill" href="#ord_tab">ORDERS</a></li>
+		<li><a id="msg_li" data-toggle="pill" href="#msg_tab">MESSAGES</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div id="ord_tab" class="tab-pane fade in active">
+			<table id="ord_main" style="display: inline-block;">
+				<tr>
+					<td>
+						<table id="ord_tbl">
+							<tr>
+								<td class="ord_th" style="width: 10%;">#</th>
+								<td class="ord_th" style="width: 60%;">Name</th>
+								<td class="ord_th" style="width: 30%;">Date</th>
+							</tr>
+
+							<tbody id="ord_bdy">
+
+							</tbody>
+						</table>
+
+					</td>
+					<td style="padding: 30px;width: 90%;">
+						<span id="ord_name"></span><span style="float: right;" id="ord_date"></span><br><br>
+						<span class='glyphicon glyphicon-earphone'></span> &nbsp;<span id="ord_tel"></span><br><br>
+						<span class='glyphicon glyphicon-envelope'></span> &nbsp;<span id="ord_mail"></span><br><br>
+						<button onclick="ord_dwld()" class="btn btn-success"><i
+								class="glyphicon glyphicon-download"></i> DOWNLOAD</button>
+						<button onclick="ord_delete()" class="btn btn-danger"><i class="glyphicon glyphicon-erase"></i>
+							DELETE</button><br><br><br>
+						<span id="ord_rec"></span><br><br>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+		<div id="msg_tab" class="tab-pane fade">
+			<table id="msg_main" style="display: inline-block;">
+				<tr>
+					<td>
+						<table id="msg_tbl">
+							<tr>
+								<td class="msg_th" style="width: 10%;">#</th>
+								<td class="msg_th" style="width: 60%;">Name</th>
+								<td class="msg_th" style="width: 30%;">Date</th>
+							</tr>
+
+							<tbody id="msg_bdy">
+
+							</tbody>
+						</table>
+
+					</td>
+					<td style="padding: 30px;width: 90%;">
+						<span id="msg_name"></span><span style="float: right;" id="msg_date"></span><br><br>
+						<span class='glyphicon glyphicon-earphone'></span> &nbsp;<span id="msg_tel"></span><br><br>
+						<span class='glyphicon glyphicon-envelope'></span> &nbsp;<span id="msg_mail"></span><br><br>
+						<button onclick="msg_delete()" class="btn btn-danger"><i class="glyphicon glyphicon-erase"></i>
+							DELETE</button><br><br><br>
+						<div id="msg_rec"></div><br><br>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+<script>
+	var book_ttl = ["Manufacturing Processes (Tamil)", "Manufacturing Processes (English)", "Strength of Materials (Tamil)", "Strength of Materials (English)", "Machine Drawing (Tamil)", "Machine Drawing (English)", "CA && CAD Practical Manual", "Foundry && Welding Practical Manual", "Lathe && Drilling Practical Manual", "Metrology && Metallography Manual", "Process Automation Practical Manual", "Thermal && Automobile Practical Manual", "Life && Employability Skills Practical Manual", "Engineering Graphics I && II (Tamil)", "Engineering Graphics I && II (English)", "Workshop Practice Practical Manual", "Special Machines (Tamil)", "Special Machines (English)", "Special Machines Manual", "Heat Power Engineering (Tamil)", "Heat Power Engineering (English)", "CAD && Manufacturing (Tamil)", "CAD && Manufacturing (English)", "CAD && Manufacturing Practical Manual"];
+	var book_pr = [168, 168, 168, 168, 126, 126, 148, 98, 98, 108, 98, 108, 128, 178, 178, 108, 168, 168, 96, 198, 198, 168, 168, 108];
+	var firebaseConfig = {
+		apiKey: "AIzaSyDTD5tC5pTCDfts_4hzmt5mATNhbcw85wg",
+		authDomain: "kal-pathippagam.firebaseapp.com",
+		databaseURL: "https://kal-pathippagam.firebaseio.com",
+		projectId: "kal-pathippagam",
+		storageBucket: "kal-pathippagam.appspot.com",
+		messagingSenderId: "1014094484908",
+		appId: "1:1014094484908:web:3059ffd3f8e3614c5c1609",
+		measurementId: "G-S3GEVRRYHN"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	var db = firebase.database();
+	var ord_obj;
+	var msg_obj;
+	var ord_key;
+	var msg_key;
+	var ord_cnt;
+	var msg_cnt;
+	var ord_cur;
+	var msg_cur;
+	db.ref().once("value", function (o) {
+		ord_obj = o.val()["orders"];
+		fill_ord();
+		
+		msg_obj = o.val()["messages"];
+		fill_msg();
+	})
+
+	function fill_ord() {
+		ord_key = [];
+		ord_cnt = 0;
+		ord_bdy.innerHTML = "";
+		for (var x in ord_obj) {
+			ord_key.push(x);
+			var dt = new Date(parseInt(ord_obj[x]["date"]));
+			ord_bdy.innerHTML += `<tr id="ord_i${ord_cnt}" onclick="ord_show(${ord_cnt});"><td>${ord_cnt + 1}</td><td>${ord_obj[x]["name"]}</td><td>${dt.toLocaleDateString("en-IN")}</td></tr>`
+			ord_cnt++;
+		}
+		ord_li.innerHTML = `ORDERS (${ord_cnt})`;
+		ord_show(0);
+	}
+
+	function ord_show(key) {
+		ord_cur = key;
+		for (var y = 0; y <= ord_cnt; y++) {
+			$("#ord_i" + y).css("backgroundColor", "transparent");
+		}
+		$("#ord_i" + key).css("backgroundColor", "darkorange");
+		ord_name.innerHTML = ord_obj[ord_key[key]]["name"];
+		ord_tel.innerHTML = ord_obj[ord_key[key]]["tel"];
+		ord_mail.innerHTML = ord_obj[ord_key[key]]["mail"] || "--";
+		ord_date.innerHTML = new Date(parseInt(ord_obj[ord_key[key]]["date"])).toLocaleString("en-IN");
+
+		var ord_tbl_rec = `<table id='ord_rec_tbl'><tr><th>#</th><th>TITLE</th><th>Qty.</th></tr>`
+		ord_obj[ord_key[key]]["book_ord_t"].forEach(function (x, i) {
+			ord_tbl_rec += `<tr><td>${i + 1}.</td><td>${book_ttl[x]}</td><td>${ord_obj[ord_key[key]]["book_ord_q"][i]}</td></tr>`;
+		});
+		ord_tbl_rec += "</table>";
+		ord_rec.innerHTML = ord_tbl_rec;
+	}
+
+	function ord_delete() {
+		if (confirm("DELETE this Order information ?")) {
+			db.ref("orders/" + ord_key[ord_cur]).remove();
+			delete ord_obj[ord_key[ord_cur]];
+			fill_ord();
+		}
+
+	}
+
+	function ord_dwld() {
+		var dt = new Date(parseInt(ord_obj[ord_key[ord_cur]]["date"]));
+		var dt_fmt = dt.getDate() + "-" + dt.getMonth() + "-" + dt.getFullYear();
+		var file_cont = dt_fmt + "\n";
+		file_cont += ord_obj[ord_key[ord_cur]]["name"] + "\n";
+		file_cont += ord_obj[ord_key[ord_cur]]["tel"] + "\n";
+		file_cont += ord_obj[ord_key[ord_cur]]["book_ord_t"].length + "\n";
+
+		ord_obj[ord_key[ord_cur]]["book_ord_t"].forEach(function (x, i) {
+			file_cont += book_ttl[x] + ": RATE = " + book_pr[x] + "\n";
+			file_cont += (parseInt(x) + 2) + "\n";
+			file_cont += ord_obj[ord_key[ord_cur]]["book_ord_q"][i] + "\n";
+		})
+
+		var pom = document.createElement('a');
+		pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(file_cont));
+		pom.setAttribute('download', ord_obj[ord_key[ord_cur]]["name"] + " (" + dt_fmt + ")" + ".kwo");
+		pom.click();
+	}
+
+	function fill_msg() {
+		msg_key = [];
+		msg_cnt = 0;
+		msg_bdy.innerHTML = "";
+		for (var x in msg_obj) {
+			msg_key.push(x);
+			var dt = new Date(parseInt(msg_obj[x]["date"]));
+			msg_bdy.innerHTML += `<tr id="msg_i${msg_cnt}" onclick="msg_show(${msg_cnt});"><td>${msg_cnt + 1}</td><td>${msg_obj[x]["name"] || "Anonymous"}</td><td>${dt.toLocaleDateString("en-IN")}</td></tr>`
+			msg_cnt++;
+		}
+		msg_li.innerHTML = `MESSAGES (${msg_cnt})`;
+		msg_show(0);
+	}
+
+	function msg_show(key) {
+		msg_cur = key;
+		for (var y = 0; y <= msg_cnt; y++) {
+			$("#msg_i" + y).css("backgroundColor", "transparent");
+		}
+		$("#msg_i" + key).css("backgroundColor", "darkorange");
+		msg_name.innerHTML = msg_obj[msg_key[key]]["name"] || "Anonymous";
+		msg_tel.innerHTML = msg_obj[msg_key[key]]["tel"] || "--";
+		msg_mail.innerHTML = msg_obj[msg_key[key]]["mail"] || "--";
+		msg_date.innerHTML = new Date(parseInt(msg_obj[msg_key[key]]["date"])).toLocaleString("en-IN");
+
+		msg_rec.innerHTML = msg_obj[msg_key[key]]["msg"] || "--";
+	}
+
+	function msg_delete() {
+		if (confirm("DELETE this Message ?")) {
+			db.ref("messages/" + msg_key[msg_cur]).remove();
+			delete msg_obj[msg_key[msg_cur]];
+			fill_msg();
+		}
+
+	}
+</script>
+
+</html>
