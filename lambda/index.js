@@ -58,6 +58,8 @@ global.main = async (params) => {
         "Process Automation Practical Manual",
         "Thermal Engineering Practical Manual",
         "Computer Integrated Manufacturing Practical Manual",
+        "Entrepreneurship and Start-Ups Practical Manual (Tamil)",
+        "Entrepreneurship and Start-Ups Practical Manual (English)",
     ]
 
     var db = admin.database();
