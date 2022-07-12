@@ -209,7 +209,7 @@
                 <div class="row">
                     <div class="col-sm-12 books_tab_int">
                         <span class="green">KAL PATHIPPAGAM</span> is generous in presenting the collection of <span
-                            class="green">3 Marks Questions</span> for
+                            class="green">3 Marks Questions & Answers</span> for
                         the benefit of the Student Community...
                     </div>
                 </div>
@@ -345,6 +345,32 @@
         "Entrepreneurship and Start-Ups Practical Manual (English)",
     ]
 
+    var book_syllabus_link = [
+        "https://drive.google.com/file/d/1pedUiB2PzoU3L9T0YC3KpaBh3EU9X1DX/view?usp=sharing",
+        "https://drive.google.com/file/d/1wji4NepEhRUa5ugWB_aT5jsYpTeyrLyf/view?usp=sharing",
+        "https://drive.google.com/file/d/1hNin9OnLTtsMQqaJrUsI9Brx0lqQO-Rp/view?usp=sharing",
+        "https://drive.google.com/file/d/1TsynxIdycSNlSdDEl2wG0gxXzbfqDRxh/view?usp=sharing",
+        "https://drive.google.com/file/d/1bD5EbCaTzw9xDPol6H98UcqReMokb8wc/view?usp=sharing",
+        "https://drive.google.com/file/d/1fDbNGDJIWYE_Ku-A7I7oefxGa3SHR_od/view?usp=sharing",
+        "https://drive.google.com/file/d/1-kCubfBsCes88dE2_daeuSm2fo_Gop-5/view?usp=sharing",
+        "https://drive.google.com/file/d/1-XgaxfdfgrfnKM8UlNb3PaQ0r9Em7DwA/view?usp=sharing",
+        "https://drive.google.com/file/d/142xQ3NLw3MabJtmbvbcy8WBQQ_uNxkjI/view?usp=sharing",
+        "https://drive.google.com/file/d/1ZOdmSJWAhOL5Z8gmmmOC7k6BvTRuXgMA/view?usp=sharing",
+        "https://drive.google.com/file/d/1LzbWhGUaq65m5DxTNbqDIqmhhMzsq6i7/view?usp=sharing",
+        "https://drive.google.com/file/d/1JljdK5ScpXrC4rIuDC7QnfrTmDwJteBg/view?usp=sharing",
+        "https://drive.google.com/file/d/1BEPq_UnUcJmVF_9jdZyMyR9TH1mdMyL1/view?usp=sharing",
+        "https://drive.google.com/file/d/1kdEs1swTgs720IBj8SV6-uaqaYjxK6B_/view?usp=sharing",
+        "https://drive.google.com/file/d/1X1GWRfsypJ9QtO3cxDFgErkv6O6HBA-j/view?usp=sharing",
+        "https://drive.google.com/file/d/1fLl6FPnDPFpCFcn7jeCP2WSjvCIsEryB/view?usp=sharing",
+        "https://drive.google.com/file/d/1dYO6FlfmvevgCK_kcoAqkusPTSfuyU5E/view?usp=sharing",
+        "https://drive.google.com/file/d/1u5_8V-UDC3GbpnWtBConFbcKK4evwW2k/view?usp=sharing",
+        "https://drive.google.com/file/d/1C0xCIBC6HmnYI16w7XhJ5kFFdlZnSXVe/view?usp=sharing",
+        "https://drive.google.com/file/d/1Zg6cNfI7pQ44Py327jjCg7GMI0iL1skd/view?usp=sharing",
+        "https://drive.google.com/file/d/1QH_6dGkD0_Yk_XsXOMrzZI7Fe9fSTu3o/view?usp=sharing",
+        "https://drive.google.com/file/d/1e4pqt26T3WLnDzO7zDrMhv-pHfwY52cN/view?usp=sharing",
+        "https://drive.google.com/file/d/1ifUBsxJuAdGiwrB9GNJroV844BO1hIWc/view?usp=sharing"
+    ]
+
     var book_pr = [
         218,
         218,
@@ -372,6 +398,8 @@
         148,
         148
     ]
+
+    
 
 
 
@@ -415,7 +443,10 @@
             str += `${(i % 2 == 0) ? '<div class="row">' : ''}
                     <div class="col-sm-6">
                         <div id="book_cont_${i}" ${book_ord[book_srl[i]] ? "style='background-color:darkblue'" : ""} class="book_cont">
-                            <img alt="${x}" src="images/wrappers/new/${x}.png" class="book_img">
+                            <div class="book_img_cont">
+                                <img alt="${x}" src="images/wrappers/new/${x}.png" class="book_img">
+                                ${book_syllabus_link[i] ? `<button class="btn btn-sm btn-primary syllabus-btn" onclick="view('${book_syllabus_link[i]}')">View Syllabus</button>`: ''}                                
+                            </div>
                             <div class="book_tbl">
                                 <div class="book_cont_ttl">${x}</div>
                                 <div><span class="book_cont_tag">Price:</span> <span class="book_cont_price_amt">₹ ${pr[i]}.00</span></div>
@@ -625,7 +656,8 @@
     }
 
     function view(q) {
-        var w = window.open(q);
+        if(q != 'undefined')
+            var w = window.open(q);
     }
 
     async function send_msg() {
