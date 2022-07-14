@@ -577,7 +577,7 @@
 
         stat.innerHTML = "<span class='loader'></span>"
 
-        fetch("https://dff0074f.eu-gb.apigw.appdomain.cloud/kal_place_order", {
+        fetch("https://kal-pathippagam-website.vercel.app/api", {
             method: "POST",
             body: JSON.stringify({
                 function: "PLACE_ORDER", name: o_name.value, tel: o_tel.value, mail: o_email.value, addr: o_addr.value,
@@ -664,7 +664,7 @@
         if (msg_area.value) {
             msg_resp.innerHTML = "Sending...";
 
-            var res = await (await fetch("https://dff0074f.eu-gb.apigw.appdomain.cloud/kal_place_order", {
+            var res = await (await fetch("https://kal-pathippagam-website.vercel.app/api", {
                 method: "POST",
                 body: JSON.stringify({
                     function: "SEND_MESSAGE", name: msg_name.value, tel: msg_phone.value, mail: msg_mail.value, msg: msg_area.value, date: Date.now()

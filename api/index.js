@@ -1,6 +1,6 @@
 module.exports =  async (request, response) => {
 
-    var req = { body: request.query};
+    var req = { body: request.body};
 
     var res_body = { res: "ERROR"};
 
