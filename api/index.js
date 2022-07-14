@@ -1,15 +1,6 @@
 module.exports =  async (request, response) => {
 
-    response.setHeader('Access-Control-Allow-Origin', '*')
-    response.status(200).json({
-        body: request.body,
-        query: request.query,
-        cookies: request.cookies,
-      });
-
-      return;
-
-    var req = { body: request.body};
+    var req = { body: JSON.parse(request.body)};
 
     var res_body = { res: "ERROR"};
 
